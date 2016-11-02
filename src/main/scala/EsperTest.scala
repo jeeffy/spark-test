@@ -1,19 +1,15 @@
 import java.util
 
 import org.apache.spark.{SparkConf, SparkContext}
-import com.espertech.esper.client.EPAdministrator;
-import com.espertech.esper.client.EPRuntime;
-import com.espertech.esper.client.EPServiceProvider;
-import com.espertech.esper.client.EPServiceProviderManager;
-import com.espertech.esper.client.EPStatement;
-import com.espertech.esper.client.EventBean;
-import com.espertech.esper.client.UpdateListener;
+import com.espertech.esper.client.EPServiceProviderManager
+import com.espertech.esper.client.EventBean
+import com.espertech.esper.client.UpdateListener
 
 object EsperTest {
   def main(args: Array[String]) {
-    val file = "/Users/jeeffy/projects/scala-test/src/main/resources/data/users.txt" // Should be some file on your system
+    val file = "src/main/resources/data/users.txt"
     val conf = new SparkConf().setAppName("Simple Application")
-    conf.setMaster("local[2]")
+    conf.setMaster("local")
     val sc = new SparkContext(conf)
     val users = sc.textFile(file)
 
@@ -39,10 +35,10 @@ object EsperTest {
     userType.put("hobby", classOf[String])
     admin.getConfiguration().addEventType("user", userType)
 
-    val epl = "select * from user where name='zs'";
+    val epl = "select * from user where name='zs'"
 
 
-    val state = admin.createEPL(epl);
+    val state = admin.createEPL(epl)
     state.addListener(new UpdateListener() {
       override def update(newEvents: Array[EventBean], oldEvents: Array[EventBean]): Unit = {
         if(newEvents != null){
@@ -51,8 +47,8 @@ object EsperTest {
           println(age,hobby)
         }
       }
-    });
-    val runtime = epService.getEPRuntime();
-    runtime.sendEvent(map, "user");
+    })
+    val runtime = epService.getEPRuntime()
+    runtime.sendEvent(map, "user")
   }
 }
