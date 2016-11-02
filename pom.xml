@@ -8,10 +8,22 @@
     <artifactId>scala</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.spark</groupId>-->
+            <!--<artifactId>spark-core_2.11</artifactId>-->
+            <!--<version>2.0.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>2.0.0</version>
+            <artifactId>spark-core_2.10</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.espertech</groupId>
+            <artifactId>esper</artifactId>
+            <version>5.5.0</version>
         </dependency>
     </dependencies>
 
