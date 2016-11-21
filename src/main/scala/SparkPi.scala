@@ -24,6 +24,7 @@ import scala.math.random
 object SparkPi {
   def main(args: Array[String]) {
     val conf = new SparkConf().setAppName("Spark Pi")
+    conf.setMaster("local")
     //conf.setMaster("spark://192.168.100.101:7077")
     val spark = new SparkContext(conf)
     val slices = if (args.length > 0) args(0).toInt else 2
