@@ -16,9 +16,11 @@
  */
 
 // scalastyle:off println
+package org.apache.spark.examples.streaming
+
 import org.apache.spark.SparkConf
-import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.storage.StorageLevel
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
  * Counts words in UTF8 encoded, '\n' delimited text received from the network every second.
@@ -42,7 +44,6 @@ object NetworkWordCount {
 
     // Create the context with a 1 second batch size
     val sparkConf = new SparkConf().setAppName("NetworkWordCount")
-    sparkConf.setMaster("local[2]")
     val ssc = new StreamingContext(sparkConf, Seconds(1))
 
     // Create a socket stream on target ip:port and count the
